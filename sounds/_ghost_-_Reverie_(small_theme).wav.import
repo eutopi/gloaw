@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/_ghost_-_Reverie_(small_theme).wav-e3bd3aa0a7e524919ca0333ff9a92840.sample"
+
+[deps]
+
+source_file="res://sounds/_ghost_-_Reverie_(small_theme).wav"
+dest_files=[ "res://.import/_ghost_-_Reverie_(small_theme).wav-e3bd3aa0a7e524919ca0333ff9a92840.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

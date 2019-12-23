@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
@@ -11,6 +11,12 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://HUD.gd" type="Script" id=10]
 [ext_resource path="res://assets/m5x7.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://sounds/select.wav" type="AudioStream" id=12]
+[ext_resource path="res://sounds/_ghost_-_Reverie_(small_theme).wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/gurdonark_-_Autumn_s_Dream_Lullaby_1.wav" type="AudioStream" id=14]
+[ext_resource path="res://sounds/beep1.wav" type="AudioStream" id=15]
+[ext_resource path="res://sounds/beep2.wav" type="AudioStream" id=16]
+[ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -147,7 +153,7 @@ margin_right = 336.0
 margin_bottom = 39.5
 custom_fonts/font = SubResource( 3 )
 text = "catch the light, but don't let your demons watch you
-<arrow keys> to move, <space> to accelerate"
+<arrow keys> or <WASD> to move, <space> to accelerate"
 align = 1
 
 [node name="InstructionsTimer" type="Timer" parent="HUD"]
@@ -165,6 +171,29 @@ custom_fonts/font = SubResource( 4 )
 text = "start"
 flat = true
 clip_text = true
+
+[node name="StartSound" type="AudioStreamPlayer2D" parent="HUD/StartButton"]
+stream = ExtResource( 12 )
+
+[node name="StartMusic" type="AudioStreamPlayer2D" parent="HUD/StartButton"]
+position = Vector2( -39.2459, -83.996 )
+stream = ExtResource( 13 )
+autoplay = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="HUD"]
+stream = ExtResource( 14 )
+
+[node name="Beep1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+volume_db = -10.602
+
+[node name="Beep2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+volume_db = -10.097
+
+[node name="DemonSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+volume_db = -15.65
 [connection signal="timeout" from="DemonTimer" to="." method="_on_DemonTimer_timeout"]
 [connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

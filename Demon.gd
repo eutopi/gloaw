@@ -14,7 +14,7 @@ func _process(delta):
 
 func _on_demon_touched(body):
 	if body.get_name() == "Player":
-		get_parent().demon_count -= 1
+		get_parent().decrease_demon_count()
 	queue_free()
 	pass # Replace with function body.
 

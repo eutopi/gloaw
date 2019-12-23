@@ -21,9 +21,9 @@ func _physics_process(delta):
 func _on_Collectable_body_entered(body):
 	if body.get_name() == "Player":
 		if get_parent().demon_count == 0:
-			get_parent().score += 1
+			get_parent().increase_score()
 		else:
-			get_parent().score -= 1
+			get_parent().decrease_score()
 	elif body.get_name() == "Ground":
 		get_parent().score -= 1
 	queue_free()

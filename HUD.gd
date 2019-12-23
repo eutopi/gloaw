@@ -19,4 +19,7 @@ func _on_StartButton_pressed():
 	$TitleLabel.hide()
 	$InstructionsLabel.hide()
 	$ScoreLabel.show()
+	$StartButton/StartSound.play()
+	$StartButton/StartMusic.stop()
+	$BackgroundMusic.play()
 	emit_signal("start_game")
