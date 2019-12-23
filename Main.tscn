@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Demon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Collectable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/bg_backdrop_long.png" type="Texture" id=5]
+[ext_resource path="res://clouds.gd" type="Script" id=6]
+[ext_resource path="res://assets/bg_clouds.png" type="Texture" id=7]
+[ext_resource path="res://assets/bg_foreground.png" type="Texture" id=8]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://HUD.gd" type="Script" id=10]
+[ext_resource path="res://assets/m5x7.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
+outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
+font_data = ExtResource( 11 )
+
+[node name="Main" type="Node2D"]
+position = Vector2( 411.859, 278.186 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+Ground = ExtResource( 2 )
+Demon = ExtResource( 3 )
+Collectable = ExtResource( 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
+
+[node name="background" type="ParallaxLayer" parent="ParallaxBackground"]
+editor/display_folded = true
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="background" type="TextureRect" parent="ParallaxBackground/background"]
+margin_left = 1.78491
+margin_right = 1025.78
+margin_bottom = 600.0
+texture = ExtResource( 5 )
+stretch_mode = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+editor/display_folded = true
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+script = ExtResource( 6 )
+
+[node name="clouds" type="TextureRect" parent="ParallaxBackground/clouds"]
+margin_left = -0.46582
+margin_right = 1023.53
+margin_bottom = 600.0
+texture = ExtResource( 7 )
+stretch_mode = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="foreground" type="ParallaxLayer" parent="ParallaxBackground"]
+editor/display_folded = true
+position = Vector2( 1.78491, 0.892456 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="foreground" type="TextureRect" parent="ParallaxBackground/foreground"]
+margin_top = -0.892456
+margin_right = 1024.0
+margin_bottom = 599.108
+texture = ExtResource( 8 )
+stretch_mode = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 9 )]
+
+[node name="Demon" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 0.485992, -528.954 )
+
+[node name="DemonTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Collectable" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="CollectableTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 10 )
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -300.0
+margin_right = 12.0
+margin_bottom = 300.0
+custom_fonts/font = SubResource( 1 )
+text = "0
+"
+align = 1
+
+[node name="TitleLabel" type="Label" parent="HUD"]
+show_behind_parent = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -92.0
+margin_top = -136.933
+margin_right = 92.0
+margin_bottom = -34.9333
+custom_fonts/font = SubResource( 2 )
+text = "gloaw"
+align = 1
+
+[node name="InstructionsLabel" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -336.0
+margin_top = -39.5
+margin_right = 336.0
+margin_bottom = 39.5
+custom_fonts/font = SubResource( 3 )
+text = "catch the light, but don't let your demons watch you
+<arrow keys> to move, <space> to accelerate"
+align = 1
+
+[node name="InstructionsTimer" type="Timer" parent="HUD"]
+
+[node name="StartButton" type="Button" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -60.8951
+margin_top = -237.818
+margin_right = 59.1049
+margin_bottom = -180.818
+custom_fonts/font = SubResource( 4 )
+text = "start"
+flat = true
+clip_text = true
+[connection signal="timeout" from="DemonTimer" to="." method="_on_DemonTimer_timeout"]
+[connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="pressed" from="HUD/StartButton" to="HUD" method="_on_StartButton_pressed"]

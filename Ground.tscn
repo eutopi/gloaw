@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ground.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 51.0148, 10 )
+
+[node name="Ground" type="StaticBody2D"]
+position = Vector2( 467.019, 285.538 )
+scale = Vector2( 20, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 11.2203, -43.7896 )
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 11.0514, -42.0826 )
+scale = Vector2( 5.06486, 1 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_screen_exited"]
