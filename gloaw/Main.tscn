@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
@@ -29,17 +29,48 @@ size = 64
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 36
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.0037037, 0.966667 )
+colors = PoolColorArray( 0.972549, 0.772549, 0.235294, 1, 0.74292, 0.465962, 0.465962, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+max_value = 10.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.865243, 0.19325 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 20, 1 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+angular_velocity = 350.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 25.0
+angle = 45.0
+scale = 10.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 48
+[sub_resource type="DynamicFont" id=9]
+size = 32
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
 render_mode unshaded;
  
@@ -50,8 +81,8 @@ void fragment()
 	COLOR.rgb = vec3(dot(screen.rgb, vec3(brightness, brightness, brightness)));
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
 
 [node name="Main" type="Node2D"]
 position = Vector2( 411.859, 278.186 )
@@ -114,15 +145,8 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
 
-[node name="Demon" parent="." instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 0.485992, -528.954 )
-
 [node name="DemonTimer" type="Timer" parent="."]
 wait_time = 3.0
-
-[node name="Collectable" parent="." instance=ExtResource( 4 )]
-visible = false
 
 [node name="CollectableTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -151,12 +175,21 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -92.0
-margin_top = -136.933
+margin_top = -145.0
 margin_right = 92.0
 margin_bottom = -34.9333
 custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "gloaw"
 align = 1
+
+[node name="Fire" type="Particles2D" parent="HUD/TitleLabel"]
+position = Vector2( 80.439, 33.6952 )
+rotation = -1.5708
+scale = Vector2( 0.2, 0.2 )
+amount = 100
+lifetime = 2.0
+process_material = SubResource( 7 )
 
 [node name="InstructionsLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
@@ -164,26 +197,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -336.0
-margin_top = -39.5
+margin_top = -70.0
 margin_right = 336.0
 margin_bottom = 39.5
-custom_fonts/font = SubResource( 3 )
-text = "catch the light, but don't let your demons watch you
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
+text = "collect fifty lights after you catch your demons
 <arrow keys> or <WASD> to move, <space> to accelerate"
 align = 1
 
 [node name="InstructionsTimer" type="Timer" parent="HUD"]
 
 [node name="StartButton" type="Button" parent="HUD"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -60.8951
-margin_top = -237.818
-margin_right = 59.1049
-margin_bottom = -180.818
-custom_fonts/font = SubResource( 4 )
+margin_left = -61.0
+margin_top = -301.0
+margin_right = 59.0
+margin_bottom = -258.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "start"
 flat = true
 clip_text = true
@@ -196,8 +233,25 @@ position = Vector2( -39.2459, -83.996 )
 stream = ExtResource( 13 )
 autoplay = true
 
+[node name="LeaderboardButton" type="Button" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -71.0
+margin_top = -264.0
+margin_right = 70.0
+margin_bottom = -226.0
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+text = "leaderboard"
+flat = true
+clip_text = true
+
 [node name="GreyscaleShader" type="TextureRect" parent="HUD"]
-material = SubResource( 6 )
+editor/display_folded = true
+material = SubResource( 11 )
 margin_top = 1.0
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -210,22 +264,42 @@ stream = ExtResource( 15 )
 volume_db = -15.146
 
 [node name="RestartButton" type="Button" parent="HUD"]
-modulate = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -61.0
-margin_top = -238.0
-margin_right = 75.0
-margin_bottom = -181.0
-custom_fonts/font = SubResource( 4 )
+margin_left = -68.2493
+margin_top = -297.514
+margin_right = 76.7507
+margin_bottom = -260.514
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 text = "restart"
 flat = true
 clip_text = true
 
 [node name="RestartSound" type="AudioStreamPlayer2D" parent="HUD/RestartButton"]
 stream = ExtResource( 12 )
+
+[node name="HomeButton" type="Button" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -69.7499
+margin_top = -260.485
+margin_right = 75.2501
+margin_bottom = -228.485
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+text = "home"
+flat = true
+clip_text = true
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="HUD"]
 stream = ExtResource( 16 )
@@ -245,4 +319,6 @@ volume_db = -15.65
 [connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="pressed" from="HUD/StartButton" to="HUD" method="_on_StartButton_pressed"]
+[connection signal="pressed" from="HUD/LeaderboardButton" to="HUD" method="_on_LeaderboardButton_pressed"]
 [connection signal="pressed" from="HUD/RestartButton" to="HUD" method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="HUD/HomeButton" to="HUD" method="_on_HomeButton_pressed"]

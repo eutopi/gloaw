@@ -36,7 +36,7 @@ func _process(delta):
 	
 	
 func new_game():
-	score = 10
+	score = 1
 	demon_count = 0
 	$DemonTimer.set_wait_time(DEMON_TIMER_WAIT_TIME)
 	$DemonTimer.start()
@@ -53,6 +53,7 @@ func end_game():
 	$CollectableTimer.stop()
 	$HUD/BackgroundMusic.stop()
 	$HUD/RestartButton.show()
+	$HUD/HomeButton.show()
 	started = false
 
 func add_ground(mode):

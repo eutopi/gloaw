@@ -6,6 +6,7 @@ signal start_game
 func _ready():
 	$GreyscaleShader.hide()
 	$RestartButton.hide()
+	$HomeButton.hide()
 	$ScoreLabel.hide()
 	pass # Replace with function body.
 
@@ -18,6 +19,7 @@ func update_score(score):
 
 func _on_StartButton_pressed():
 	$StartButton.hide()
+	$LeaderboardButton.hide()
 	$TitleLabel.hide()
 	$InstructionsLabel.hide()
 	$ScoreLabel.show()
@@ -28,5 +30,22 @@ func _on_StartButton_pressed():
 func _on_RestartButton_pressed():
 	$RestartButton.hide()
 	$RestartButton/RestartSound.play()
+	$HomeButton.hide()
 	$GreyscaleShader.hide()
 	emit_signal("start_game")
+
+func _on_LeaderboardButton_pressed():
+	$StartButton.hide()
+	$LeaderboardButton.hide()
+	$TitleLabel.hide()
+	$InstructionsLabel.hide()
+	$StartButton/StartSound.play()
+
+func _on_HomeButton_pressed():
+	_ready()
+	$RestartButton/RestartSound.play()
+	$TitleLabel.show()
+	$InstructionsLabel.show()
+	$StartButton.show()
+	$LeaderboardButton.show()
+	$StartButton/StartMusic.play()
