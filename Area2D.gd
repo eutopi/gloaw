@@ -24,7 +24,8 @@ func _on_Collectable_body_entered(body):
 			get_parent().increase_score()
 		else:
 			get_parent().decrease_score()
-	elif body.get_name() == "Ground":
+	else:
 		get_parent().score -= 1
+	print(body.get_name())
 	queue_free()
 	pass # Replace with function body.

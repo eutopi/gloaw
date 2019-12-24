@@ -25,11 +25,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if ground_pos[-1] > $Player.position.x + screensize.x / 2:
-		add_ground('LEFT')
+			add_ground('LEFT')
 	elif ground_pos[0] < $Player.position.x - screensize.x / 2:
-		add_ground('RIGHT')
-	time_dis /= 2
-	$HUD.update_score(score)
+			add_ground('RIGHT')
+	if started:
+		time_dis /= 2
+		$HUD.update_score(score)
+		if score == 0:
+			end_game()
+	
 	
 func new_game():
 	score = 1
@@ -37,8 +41,18 @@ func new_game():
 	$DemonTimer.start()
 	$CollectableTimer.set_wait_time(COLLECTABLE_TIMER_WAIT_TIME)
 	$CollectableTimer.start()
+	$HUD/BackgroundMusic.play()
 	$HUD.update_score(score)
 	started = true
+
+func end_game():
+	$HUD/GreyscaleShader.show()
+	$HUD/GreyscaleShader/Static.play()
+	$DemonTimer.stop()
+	$CollectableTimer.stop()
+	$HUD/BackgroundMusic.stop()
+	$HUD/RestartButton.show()
+	started = false
 
 func add_ground(mode):
 	var ground = Ground.instance()
@@ -71,12 +85,14 @@ func _on_CollectableTimer_timeout():
 		collectable.position.y = $Player.position.y - 400
 
 func increase_score():
-	$Beep1.play()
-	score += 1
+	if started:
+		$Beep1.play()
+		score += 1
 
 func decrease_score():
-	$Beep2.play()
-	score -= 1
+	if started:
+		$Beep2.play()
+		score -= 1
 
 func decrease_demon_count():
 	$DemonSound.play()

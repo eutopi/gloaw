@@ -4,6 +4,8 @@ signal start_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$GreyscaleShader.hide()
+	$RestartButton.hide()
 	$ScoreLabel.hide()
 	pass # Replace with function body.
 
@@ -21,5 +23,10 @@ func _on_StartButton_pressed():
 	$ScoreLabel.show()
 	$StartButton/StartSound.play()
 	$StartButton/StartMusic.stop()
-	$BackgroundMusic.play()
+	emit_signal("start_game")
+
+func _on_RestartButton_pressed():
+	$RestartButton.hide()
+	$RestartButton/RestartSound.play()
+	$GreyscaleShader.hide()
 	emit_signal("start_game")
