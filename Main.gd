@@ -5,7 +5,7 @@ export (PackedScene) var Demon
 export (PackedScene) var Collectable
 
 const GROUND_LENGTH = 1000
-const DEMON_TIMER_WAIT_TIME = 3
+const DEMON_TIMER_WAIT_TIME = 4
 const COLLECTABLE_TIMER_WAIT_TIME = 1
 
 var screensize
@@ -31,12 +31,13 @@ func _process(delta):
 	if started:
 		time_dis /= 2
 		$HUD.update_score(score)
-		if score == 0:
+		if score <= 0:
 			end_game()
 	
 	
 func new_game():
-	score = 1
+	score = 10
+	demon_count = 0
 	$DemonTimer.set_wait_time(DEMON_TIMER_WAIT_TIME)
 	$DemonTimer.start()
 	$CollectableTimer.set_wait_time(COLLECTABLE_TIMER_WAIT_TIME)
@@ -69,10 +70,10 @@ func _on_DemonTimer_timeout():
 		var demon = Demon.instance()
 		add_child(demon)
 		if randi() % 2 == 0:
-			demon.position.x = $Player.position.x + 400 + rand_range(0,150)
+			demon.position.x = $Player.position.x + 400 + rand_range(0,100)
 			demon._set_orientation(true)
 		else:
-			demon.position.x = $Player.position.x - rand_range(0,150)
+			demon.position.x = $Player.position.x - rand_range(0,100)
 			demon._set_orientation(false)
 		demon.position.y += 35
 		demon_count += 1
@@ -87,7 +88,7 @@ func _on_CollectableTimer_timeout():
 func increase_score():
 	if started:
 		$Beep1.play()
-		score += 1
+		score += 2
 
 func decrease_score():
 	if started:

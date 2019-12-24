@@ -210,7 +210,7 @@ stream = ExtResource( 15 )
 volume_db = -15.146
 
 [node name="RestartButton" type="Button" parent="HUD"]
-modulate = Color( 0.431373, 0.0666667, 0.0666667, 1 )
+modulate = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5

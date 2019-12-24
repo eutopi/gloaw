@@ -10,7 +10,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if get_parent().started == false:
+		queue_free()
 
 func _on_demon_touched(body):
 	if body.get_name() == "Player":
