@@ -1,6 +1,9 @@
 # gloaw
 
-2D side-scroller game
+glow in the gloam. [wip]
+
+<p align="center"><img src="https://github.com/eutopi/gloaw/blob/master/screenshots/1.png" alt="drawing" width="500"/></p>
+<p align="center"><i></i></p>
 
 ## Credits
 Font: Daniel Lissen
