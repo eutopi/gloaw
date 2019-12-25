@@ -23,6 +23,7 @@ var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(OS.get_user_data_dir())
 	if not savegame.file_exists(save_path):
 		create_save()
 	screensize = get_viewport_rect().size
@@ -130,17 +131,17 @@ func _on_CollectableTimer_timeout():
 
 func increase_score():
 	if started:
-		$Beep1.play()
+		$HUD/Beep1.play()
 		score += 2
 
 func decrease_score():
 	if started:
-		$Beep2.play()
+		$HUD/Beep2.play()
 		score -= 1
 
 func decrease_demon_count():
 	if !won:
-		$DemonSound.play()
+		$HUD/DemonSound.play()
 		demon_count -= 1
 
 func _on_WinTimer_timeout():
