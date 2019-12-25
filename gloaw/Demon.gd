@@ -10,14 +10,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_parent().started == false:
+	if !get_parent().started:
 		queue_free()
 
 func _on_demon_touched(body):
 	if body.get_name() == "Player":
 		get_parent().decrease_demon_count()
-	queue_free()
-	pass # Replace with function body.
+		queue_free()
 
 func _set_orientation(b):
 	$Sprite.flip_h = b

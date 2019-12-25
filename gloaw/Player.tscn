@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/image_part_still.png" type="Texture" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://assets/image_part_006.png" type="Texture" id=8]
 [ext_resource path="res://assets/image_part_007.png" type="Texture" id=9]
 [ext_resource path="res://assets/image_part_008.png" type="Texture" id=10]
+[ext_resource path="res://assets/demon_row1.png" type="Texture" id=11]
+[ext_resource path="res://assets/demon_row2.png" type="Texture" id=12]
+[ext_resource path="res://assets/demon_row3.png" type="Texture" id=13]
+[ext_resource path="res://assets/demon_row4.png" type="Texture" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,6 +31,19 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 20.2399
 height = 66.3976
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+} ]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 101.24, 81.2261 )
@@ -46,3 +63,7 @@ current = true
 process_mode = 0
 limit_top = 0
 smoothing_enabled = true
+
+[node name="DemonRow" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 3 )

@@ -28,9 +28,11 @@ func _on_StartButton_pressed():
 	emit_signal("start_game")
 
 func _on_RestartButton_pressed():
+	$MusicBox.stop()
 	$RestartButton.hide()
 	$RestartButton/RestartSound.play()
 	$HomeButton.hide()
+	$ScoreLabel.show()
 	$GreyscaleShader.hide()
 	emit_signal("start_game")
 
@@ -40,12 +42,25 @@ func _on_LeaderboardButton_pressed():
 	$TitleLabel.hide()
 	$InstructionsLabel.hide()
 	$StartButton/StartSound.play()
+	$BackButton.show()
 
 func _on_HomeButton_pressed():
 	_ready()
+	$MusicBox.stop()
 	$RestartButton/RestartSound.play()
 	$TitleLabel.show()
 	$InstructionsLabel.show()
 	$StartButton.show()
 	$LeaderboardButton.show()
 	$StartButton/StartMusic.play()
+
+
+func _on_BackButton_pressed():
+	_ready()
+	$RestartButton/RestartSound.play()
+	$TitleLabel.show()
+	$InstructionsLabel.show()
+	$StartButton.show()
+	$LeaderboardButton.show()
+	$BackButton.hide()
+	pass # Replace with function body.

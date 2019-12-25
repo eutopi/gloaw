@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
@@ -16,9 +16,11 @@
 [ext_resource path="res://assets/white.png" type="Texture" id=14]
 [ext_resource path="res://sounds/static.wav" type="AudioStream" id=15]
 [ext_resource path="res://sounds/gurdonark_-_Autumn_s_Dream_Lullaby_1.wav" type="AudioStream" id=16]
-[ext_resource path="res://sounds/beep1.wav" type="AudioStream" id=17]
-[ext_resource path="res://sounds/beep2.wav" type="AudioStream" id=18]
-[ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=19]
+[ext_resource path="res://sounds/applause.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/music-box.wav" type="AudioStream" id=18]
+[ext_resource path="res://sounds/beep1.wav" type="AudioStream" id=19]
+[ext_resource path="res://sounds/beep2.wav" type="AudioStream" id=20]
+[ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -150,6 +152,10 @@ wait_time = 3.0
 
 [node name="CollectableTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="WinTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
@@ -285,6 +291,7 @@ clip_text = true
 stream = ExtResource( 12 )
 
 [node name="HomeButton" type="Button" parent="HUD"]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -301,24 +308,52 @@ text = "home"
 flat = true
 clip_text = true
 
+[node name="BackButton" type="Button" parent="HUD"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -69.7499
+margin_top = -260.485
+margin_right = 75.2501
+margin_bottom = -228.485
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
+text = "back"
+flat = true
+clip_text = true
+
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="HUD"]
 stream = ExtResource( 16 )
 
-[node name="Beep1" type="AudioStreamPlayer2D" parent="."]
+[node name="Applause" type="AudioStreamPlayer2D" parent="HUD"]
+position = Vector2( 411.859, 278.186 )
 stream = ExtResource( 17 )
+
+[node name="MusicBox" type="AudioStreamPlayer2D" parent="HUD"]
+position = Vector2( 411.859, 278.186 )
+stream = ExtResource( 18 )
+
+[node name="Beep1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
 volume_db = -10.602
 
 [node name="Beep2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 18 )
+stream = ExtResource( 20 )
 volume_db = -10.097
 
 [node name="DemonSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 19 )
+stream = ExtResource( 21 )
 volume_db = -15.65
 [connection signal="timeout" from="DemonTimer" to="." method="_on_DemonTimer_timeout"]
 [connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="pressed" from="HUD/StartButton" to="HUD" method="_on_StartButton_pressed"]
 [connection signal="pressed" from="HUD/LeaderboardButton" to="HUD" method="_on_LeaderboardButton_pressed"]
 [connection signal="pressed" from="HUD/RestartButton" to="HUD" method="_on_RestartButton_pressed"]
 [connection signal="pressed" from="HUD/HomeButton" to="HUD" method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="HUD/BackButton" to="HUD" method="_on_BackButton_pressed"]

@@ -14,7 +14,7 @@ var ground_pos = Array()
 var time_dis = 1
 var score = 1
 var demon_count = 0
-
+var won = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,11 +33,15 @@ func _process(delta):
 		$HUD.update_score(score)
 		if score <= 0:
 			end_game()
+		if score >= 5:
+			win_game()
 	
 	
 func new_game():
+	won = false
 	score = 1
 	demon_count = 0
+	$Player/DemonRow.hide()
 	$DemonTimer.set_wait_time(DEMON_TIMER_WAIT_TIME)
 	$DemonTimer.start()
 	$CollectableTimer.set_wait_time(COLLECTABLE_TIMER_WAIT_TIME)
@@ -45,7 +49,7 @@ func new_game():
 	$HUD/BackgroundMusic.play()
 	$HUD.update_score(score)
 	started = true
-
+	
 func end_game():
 	$HUD/GreyscaleShader.show()
 	$HUD/GreyscaleShader/Static.play()
@@ -54,6 +58,14 @@ func end_game():
 	$HUD/BackgroundMusic.stop()
 	$HUD/RestartButton.show()
 	$HUD/HomeButton.show()
+	started = false
+	
+func win_game():
+	won = true
+	$DemonTimer.stop()
+	$CollectableTimer.stop()
+	$HUD/BackgroundMusic.stop()
+	$WinTimer.start()
 	started = false
 
 func add_ground(mode):
@@ -97,5 +109,14 @@ func decrease_score():
 		score -= 1
 
 func decrease_demon_count():
-	$DemonSound.play()
-	demon_count -= 1
+	if !won:
+		$DemonSound.play()
+		demon_count -= 1
+
+func _on_WinTimer_timeout():
+	$HUD/ScoreLabel.hide()
+	$HUD/MusicBox.play()
+	$HUD/Applause.play()
+	$HUD/RestartButton.show()
+	$HUD/HomeButton.show()
+	$Player/DemonRow.show()

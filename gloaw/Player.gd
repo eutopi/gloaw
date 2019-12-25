@@ -21,15 +21,21 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = false
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.play()
+		$DemonRow.animation = "walk"
+		$DemonRow.play()
 	elif Input.is_action_pressed("ui_left"):
 		motion.x = -SPEED
 		$AnimatedSprite.flip_h = true
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.play()
+		$DemonRow.animation = "walk"
+		$DemonRow.play()
 	else:
 		motion.x = 0
 		$AnimatedSprite.stop()
 		$AnimatedSprite.animation = "default"
+		$DemonRow.animation = "default"
+		$DemonRow.stop()
 		
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
