@@ -8,6 +8,10 @@ const GROUND_LENGTH = 1000
 const DEMON_TIMER_WAIT_TIME = 4
 const COLLECTABLE_TIMER_WAIT_TIME = 1
 
+var savegame = File.new()
+var save_path = "user://savegame.save"
+var save_data = {}
+
 var screensize
 var started = false
 var ground_pos = Array()
@@ -19,6 +23,8 @@ var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if not savegame.file_exists(save_path):
+		create_save()
 	screensize = get_viewport_rect().size
 	add_ground('LEFT')
 	add_ground('RIGHT')
@@ -73,6 +79,24 @@ func win_game():
 	$HUD/BackgroundMusic.stop()
 	$WinTimer.start()
 	started = false
+
+func create_save():
+	savegame.open(save_path, File.WRITE)
+	savegame.store_var(save_data)
+	savegame.close()
+	
+func save_game(score, datetime):
+	save_data = load_game()
+	save_data[score] = datetime
+	savegame.open(save_path, File.WRITE)
+	savegame.store_var(save_data)
+	savegame.close()
+
+func load_game():
+	savegame.open(save_path, File.READ)
+	save_data = savegame.get_var()
+	savegame.close()
+	return save_data
 
 func add_ground(mode):
 	var ground = Ground.instance()
@@ -129,6 +153,16 @@ func _on_WinTimer_timeout():
 	$HUD/TimerLabel.hide()
 	$HUD/WinningScoreLabel.text = str(time)
 	$HUD/WinningScoreLabel.show()
+	var datetime = OS.get_datetime()
+	var currdate = format_time(datetime.get('month'))+'/'+format_time(datetime.get('day'))+'/'+str(datetime.get('year'))
+	var currtime = format_time(datetime.get('hour'))+':'+format_time(datetime.get('minute'))+':'+format_time(datetime.get('second'))
+	save_game(time, currdate + ' ' + currtime)
+
+func format_time(t):
+	if t % 10 == t:
+		return str('0' + str(t))
+	else:
+		return str(t)
 
 func _on_GameTimer_timeout():
 	time += 0.1
