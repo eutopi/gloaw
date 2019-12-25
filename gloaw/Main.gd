@@ -15,6 +15,7 @@ var time_dis = 1
 var score = 1
 var demon_count = 0
 var won = false
+var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,21 +32,23 @@ func _process(delta):
 	if started:
 		time_dis /= 2
 		$HUD.update_score(score)
+		$HUD/TimerLabel.text = "Time: " + str(time)
 		if score <= 0:
 			end_game()
 		if score >= 5:
 			win_game()
 	
-	
 func new_game():
 	won = false
 	score = 1
+	time = 0
 	demon_count = 0
 	$Player/DemonRow.hide()
 	$DemonTimer.set_wait_time(DEMON_TIMER_WAIT_TIME)
 	$DemonTimer.start()
 	$CollectableTimer.set_wait_time(COLLECTABLE_TIMER_WAIT_TIME)
 	$CollectableTimer.start()
+	$GameTimer.start()
 	$HUD/BackgroundMusic.play()
 	$HUD.update_score(score)
 	started = true
@@ -55,15 +58,18 @@ func end_game():
 	$HUD/GreyscaleShader/Static.play()
 	$DemonTimer.stop()
 	$CollectableTimer.stop()
+	$GameTimer.stop()
 	$HUD/BackgroundMusic.stop()
 	$HUD/RestartButton.show()
 	$HUD/HomeButton.show()
+	$HUD/TimerLabel.hide()
 	started = false
 	
 func win_game():
 	won = true
 	$DemonTimer.stop()
 	$CollectableTimer.stop()
+	$GameTimer.stop()
 	$HUD/BackgroundMusic.stop()
 	$WinTimer.start()
 	started = false
@@ -120,3 +126,9 @@ func _on_WinTimer_timeout():
 	$HUD/RestartButton.show()
 	$HUD/HomeButton.show()
 	$Player/DemonRow.show()
+	$HUD/TimerLabel.hide()
+	$HUD/WinningScoreLabel.text = str(time)
+	$HUD/WinningScoreLabel.show()
+
+func _on_GameTimer_timeout():
+	time += 0.1

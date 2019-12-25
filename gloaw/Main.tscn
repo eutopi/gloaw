@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
@@ -23,29 +23,33 @@
 [ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=21]
 
 [sub_resource type="DynamicFont" id=1]
-size = 64
+size = 32
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.0037037, 0.966667 )
 colors = PoolColorArray( 0.972549, 0.772549, 0.235294, 1, 0.74292, 0.465962, 0.465962, 1 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 max_value = 10.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.865243, 0.19325 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 2
 emission_box_extents = Vector3( 5, 20, 1 )
 flag_disable_z = true
@@ -59,20 +63,20 @@ orbit_velocity_random = 0.0
 linear_accel = 25.0
 angle = 45.0
 scale = 10.0
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 32
-outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
-font_data = ExtResource( 11 )
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 32
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="Shader" id=10]
+[sub_resource type="DynamicFont" id=10]
+size = 32
+outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="Shader" id=11]
 code = "shader_type canvas_item;
 render_mode unshaded;
  
@@ -83,8 +87,12 @@ void fragment()
 	COLOR.rgb = vec3(dot(screen.rgb, vec3(brightness, brightness, brightness)));
 }"
 
-[sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 10 )
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 64
+font_data = ExtResource( 11 )
 
 [node name="Main" type="Node2D"]
 position = Vector2( 411.859, 278.186 )
@@ -157,8 +165,19 @@ wait_time = 0.1
 wait_time = 0.1
 one_shot = true
 
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 10 )
+
+[node name="TimerLabel" type="Label" parent="HUD"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
@@ -166,10 +185,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -12.0
-margin_top = -300.0
+margin_top = -280.0
 margin_right = 12.0
 margin_bottom = 300.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "0
 "
 align = 1
@@ -184,7 +204,7 @@ margin_left = -92.0
 margin_top = -145.0
 margin_right = 92.0
 margin_bottom = -34.9333
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "gloaw"
 align = 1
@@ -195,7 +215,7 @@ rotation = -1.5708
 scale = Vector2( 0.2, 0.2 )
 amount = 100
 lifetime = 2.0
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 
 [node name="InstructionsLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
@@ -206,7 +226,7 @@ margin_left = -336.0
 margin_top = -70.0
 margin_right = 336.0
 margin_bottom = 39.5
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "collect fifty lights after you catch your demons
 <arrow keys> or <WASD> to move, <space> to accelerate"
@@ -224,7 +244,7 @@ margin_left = -61.0
 margin_top = -301.0
 margin_right = 59.0
 margin_bottom = -258.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "start"
@@ -248,7 +268,7 @@ margin_left = -71.0
 margin_top = -264.0
 margin_right = 70.0
 margin_bottom = -226.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "leaderboard"
@@ -257,7 +277,7 @@ clip_text = true
 
 [node name="GreyscaleShader" type="TextureRect" parent="HUD"]
 editor/display_folded = true
-material = SubResource( 11 )
+material = SubResource( 12 )
 margin_top = 1.0
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -279,7 +299,7 @@ margin_left = -68.2493
 margin_top = -297.514
 margin_right = 76.7507
 margin_bottom = -260.514
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -300,7 +320,7 @@ margin_left = -69.7499
 margin_top = -260.485
 margin_right = 75.2501
 margin_bottom = -228.485
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -318,7 +338,7 @@ margin_left = -69.7499
 margin_top = -260.485
 margin_right = 75.2501
 margin_bottom = -228.485
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
@@ -337,6 +357,21 @@ stream = ExtResource( 17 )
 position = Vector2( 411.859, 278.186 )
 stream = ExtResource( 18 )
 
+[node name="WinningScoreLabel" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -45.0
+margin_top = -140.0
+margin_right = 56.0
+margin_bottom = 25.5
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
+text = "0
+"
+align = 1
+
 [node name="Beep1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 19 )
 volume_db = -10.602
@@ -351,6 +386,7 @@ volume_db = -15.65
 [connection signal="timeout" from="DemonTimer" to="." method="_on_DemonTimer_timeout"]
 [connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]
 [connection signal="timeout" from="WinTimer" to="." method="_on_WinTimer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="pressed" from="HUD/StartButton" to="HUD" method="_on_StartButton_pressed"]
 [connection signal="pressed" from="HUD/LeaderboardButton" to="HUD" method="_on_LeaderboardButton_pressed"]
