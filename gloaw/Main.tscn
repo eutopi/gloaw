@@ -1,59 +1,63 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Demon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Collectable.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/bg_backdrop_long.png" type="Texture" id=5]
-[ext_resource path="res://clouds.gd" type="Script" id=6]
-[ext_resource path="res://assets/bg_clouds.png" type="Texture" id=7]
-[ext_resource path="res://assets/bg_foreground.png" type="Texture" id=8]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=9]
-[ext_resource path="res://HUD.gd" type="Script" id=10]
-[ext_resource path="res://assets/m5x7.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://sounds/select.wav" type="AudioStream" id=12]
-[ext_resource path="res://sounds/_ghost_-_Reverie_(small_theme).wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/white.png" type="Texture" id=14]
-[ext_resource path="res://sounds/static.wav" type="AudioStream" id=15]
-[ext_resource path="res://sounds/gurdonark_-_Autumn_s_Dream_Lullaby_1.wav" type="AudioStream" id=16]
-[ext_resource path="res://sounds/music-box.wav" type="AudioStream" id=17]
-[ext_resource path="res://sounds/applause.wav" type="AudioStream" id=18]
-[ext_resource path="res://sounds/beep1.wav" type="AudioStream" id=19]
-[ext_resource path="res://sounds/beep2.wav" type="AudioStream" id=20]
-[ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/lighting.png" type="Texture" id=5]
+[ext_resource path="res://assets/bg_backdrop_long.png" type="Texture" id=6]
+[ext_resource path="res://clouds.gd" type="Script" id=7]
+[ext_resource path="res://assets/bg_clouds.png" type="Texture" id=8]
+[ext_resource path="res://assets/bg_foreground.png" type="Texture" id=9]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://HUD.gd" type="Script" id=11]
+[ext_resource path="res://assets/m5x7.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://sounds/select.wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/_ghost_-_Reverie_(small_theme).wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/white.png" type="Texture" id=15]
+[ext_resource path="res://sounds/static.wav" type="AudioStream" id=16]
+[ext_resource path="res://sounds/gurdonark_-_Autumn_s_Dream_Lullaby_1.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/music-box.wav" type="AudioStream" id=18]
+[ext_resource path="res://sounds/applause.wav" type="AudioStream" id=19]
+[ext_resource path="res://sounds/beep1.wav" type="AudioStream" id=20]
+[ext_resource path="res://sounds/beep2.wav" type="AudioStream" id=21]
+[ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=22]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 11 )
+[sub_resource type="OccluderPolygon2D" id=17]
+polygon = PoolVector2Array( 3.83844, -43.8348, -6.00272, -42.6251, -11.269, -38.8377, -16.4948, -31.7763, -20.2003, -21.3793, -20.4828, -12.3937, -19.2074, -6.80582, -17.7194, -7.73407, -17.2827, -2.63358, -14.2174, -3.48953, -14.8813, 0.797852, -18.2295, 6.0816, -16.2863, 7.16461, -20.0112, 14.0918, -26.4076, 22.8095, -30.1304, 30.6286, -24.8144, 38.2407, -20.415, 40.2446, -22.153, 58.9799, 5.0249, 61.437, 6.99078, 42.4291, 11.7719, 40.3725, 9.25601, 31.9747, 7.2457, 19.4705, 6.7471, 11.2918, 4.31561, 4.48846, 3.85086, 0.375824, 5.09174, -3.74982, 10.1433, -1.91296, 15.7482, -5.16818, 19.2816, -10.3328, 20.1542, -13.8048, 22.6768, -14.2243, 20.3519, -17.4492, 22.5814, -22.1017, 21.8869, -30.3016, 19.3171, -35.832, 11.9811, -42.1774 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 64
-font_data = ExtResource( 11 )
+size = 32
+font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 64
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
-font_data = ExtResource( 11 )
+font_data = ExtResource( 12 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0.0037037, 0.966667 )
 colors = PoolColorArray( 0.972549, 0.772549, 0.235294, 1, 0.74292, 0.465962, 0.465962, 1 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=9]
 max_value = 10.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.865243, 0.19325 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=8]
-curve = SubResource( 7 )
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=11]
 emission_shape = 2
 emission_box_extents = Vector3( 5, 20, 1 )
 flag_disable_z = true
@@ -67,20 +71,20 @@ orbit_velocity_random = 0.0
 linear_accel = 25.0
 angle = 45.0
 scale = 10.0
-scale_curve = SubResource( 8 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=12]
 size = 32
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
-font_data = ExtResource( 11 )
+font_data = ExtResource( 12 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 size = 32
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
-font_data = ExtResource( 11 )
+font_data = ExtResource( 12 )
 
-[sub_resource type="Shader" id=12]
+[sub_resource type="Shader" id=14]
 code = "shader_type canvas_item;
 render_mode unshaded;
  
@@ -91,15 +95,15 @@ void fragment()
 	COLOR.rgb = vec3(dot(screen.rgb, vec3(brightness, brightness, brightness)));
 }"
 
-[sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 12 )
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=16]
 size = 64
-font_data = ExtResource( 11 )
+font_data = ExtResource( 12 )
 
 [node name="Main" type="Node2D"]
-position = Vector2( 411.859, 278.186 )
+position = Vector2( 386.631, 256.746 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -109,7 +113,18 @@ Demon = ExtResource( 3 )
 Collectable = ExtResource( 4 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-editor/display_folded = true
+
+[node name="Light2D" type="Light2D" parent="ParallaxBackground"]
+position = Vector2( 555.709, -72.8737 )
+scale = Vector2( 5.04648, 5.00618 )
+texture = ExtResource( 5 )
+offset = Vector2( -52.2507, 1.98285 )
+texture_scale = 2.0
+color = Color( 1, 0.847059, 0.439216, 1 )
+energy = 1.1
+range_layer_min = -1
+shadow_enabled = true
+shadow_color = Color( 0.683594, 0.315107, 0.315107, 0 )
 
 [node name="background" type="ParallaxLayer" parent="ParallaxBackground"]
 editor/display_folded = true
@@ -120,7 +135,7 @@ motion_mirroring = Vector2( 1024, 0 )
 margin_left = 1.78491
 margin_right = 1025.78
 margin_bottom = 600.0
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 stretch_mode = 2
 __meta__ = {
 "_edit_group_": true
@@ -130,34 +145,41 @@ __meta__ = {
 editor/display_folded = true
 motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 1024, 0 )
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="clouds" type="TextureRect" parent="ParallaxBackground/clouds"]
 margin_left = -0.46582
 margin_right = 1023.53
 margin_bottom = 600.0
-texture = ExtResource( 7 )
-stretch_mode = 2
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="foreground" type="ParallaxLayer" parent="ParallaxBackground"]
-editor/display_folded = true
-position = Vector2( 1.78491, 0.892456 )
-motion_mirroring = Vector2( 1024, 0 )
-
-[node name="foreground" type="TextureRect" parent="ParallaxBackground/foreground"]
-margin_top = -0.892456
-margin_right = 1024.0
-margin_bottom = 599.108
 texture = ExtResource( 8 )
 stretch_mode = 2
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Player" parent="." instance=ExtResource( 9 )]
+[node name="foreground" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 1.78491, 0.892456 )
+motion_mirroring = Vector2( 1024, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="foreground" type="TextureRect" parent="ParallaxBackground/foreground"]
+margin_left = 2.14577e-06
+margin_top = -0.892456
+margin_right = 1024.0
+margin_bottom = 599.108
+texture = ExtResource( 9 )
+stretch_mode = 2
+
+[node name="Player" parent="." instance=ExtResource( 10 )]
+position = Vector2( 154.927, 171.029 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Player"]
+position = Vector2( 0.197083, 2.06857 )
+rotation = -12.6746
+z_index = -1
+occluder = SubResource( 17 )
 
 [node name="DemonTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -173,10 +195,10 @@ one_shot = true
 wait_time = 0.1
 
 [node name="HUD" type="CanvasLayer" parent="."]
-editor/display_folded = true
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Leaderboard" type="Control" parent="HUD"]
+editor/display_folded = true
 margin_left = 357.0
 margin_top = 163.233
 margin_right = 415.606
@@ -191,7 +213,7 @@ margin_left = -20.0
 margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "1)
 "
@@ -205,7 +227,7 @@ margin_left = -20.0
 margin_top = 5.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "2)
 "
@@ -219,7 +241,7 @@ margin_left = -20.0
 margin_top = 30.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "3)
 "
@@ -233,7 +255,7 @@ margin_left = -20.0
 margin_top = 55.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "4)
 "
@@ -247,7 +269,7 @@ margin_left = -20.0
 margin_top = 80.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "5)
 "
@@ -257,7 +279,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 40.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
@@ -269,7 +291,7 @@ margin_left = -12.0
 margin_top = -280.0
 margin_right = 12.0
 margin_bottom = 300.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "0
 "
@@ -285,7 +307,7 @@ margin_left = -92.0
 margin_top = -145.0
 margin_right = 92.0
 margin_bottom = -34.9333
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "gloaw"
 align = 1
@@ -296,7 +318,7 @@ rotation = -1.5708
 scale = Vector2( 0.2, 0.2 )
 amount = 100
 lifetime = 2.0
-process_material = SubResource( 9 )
+process_material = SubResource( 11 )
 
 [node name="InstructionsLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
@@ -307,9 +329,9 @@ margin_left = -336.0
 margin_top = -70.0
 margin_right = 336.0
 margin_bottom = 39.5
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
-text = "collect fifty lights after you catch your demons
+text = "collect twenty lights after you catch your demons
 <arrow keys> or <WASD> to move, <space> to accelerate"
 align = 1
 
@@ -325,7 +347,7 @@ margin_left = -61.0
 margin_top = -301.0
 margin_right = 59.0
 margin_bottom = -258.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "start"
@@ -333,10 +355,10 @@ flat = true
 clip_text = true
 
 [node name="StartSound" type="AudioStreamPlayer" parent="HUD/StartButton"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 
 [node name="StartMusic" type="AudioStreamPlayer" parent="HUD/StartButton"]
-stream = ExtResource( 13 )
+stream = ExtResource( 14 )
 autoplay = true
 
 [node name="LeaderboardButton" type="Button" parent="HUD"]
@@ -348,7 +370,7 @@ margin_left = -71.0
 margin_top = -264.0
 margin_right = 70.0
 margin_bottom = -226.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "leaderboard"
@@ -356,15 +378,16 @@ flat = true
 clip_text = true
 
 [node name="GreyscaleShader" type="TextureRect" parent="HUD"]
-material = SubResource( 13 )
+visible = false
+material = SubResource( 15 )
 margin_top = 1.0
 margin_right = 1024.0
 margin_bottom = 600.0
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 expand = true
 
 [node name="Static" type="AudioStreamPlayer" parent="HUD/GreyscaleShader"]
-stream = ExtResource( 15 )
+stream = ExtResource( 16 )
 volume_db = -15.294
 
 [node name="RestartButton" type="Button" parent="HUD"]
@@ -376,7 +399,7 @@ margin_left = -68.2493
 margin_top = -297.514
 margin_right = 76.7507
 margin_bottom = -260.514
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -385,7 +408,7 @@ flat = true
 clip_text = true
 
 [node name="RestartSound" type="AudioStreamPlayer" parent="HUD/RestartButton"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 
 [node name="HomeButton" type="Button" parent="HUD"]
 visible = false
@@ -397,7 +420,7 @@ margin_left = -69.7499
 margin_top = -260.485
 margin_right = 75.2501
 margin_bottom = -228.485
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -415,7 +438,7 @@ margin_left = -69.7499
 margin_top = -260.485
 margin_right = 75.2501
 margin_bottom = -228.485
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
@@ -424,13 +447,13 @@ flat = true
 clip_text = true
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="HUD"]
-stream = ExtResource( 16 )
-
-[node name="MusicBox" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 17 )
 
-[node name="Applause" type="AudioStreamPlayer" parent="HUD"]
+[node name="MusicBox" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 18 )
+
+[node name="Applause" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource( 19 )
 
 [node name="WinningScoreLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
@@ -441,22 +464,22 @@ margin_left = -45.0
 margin_top = -140.0
 margin_right = 56.0
 margin_bottom = 25.5
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "0
 "
 align = 1
 
 [node name="Beep1" type="AudioStreamPlayer" parent="HUD"]
-stream = ExtResource( 19 )
-volume_db = -10.706
-
-[node name="Beep2" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 20 )
 volume_db = -10.706
 
-[node name="DemonSound" type="AudioStreamPlayer" parent="HUD"]
+[node name="Beep2" type="AudioStreamPlayer" parent="HUD"]
 stream = ExtResource( 21 )
+volume_db = -10.706
+
+[node name="DemonSound" type="AudioStreamPlayer" parent="HUD"]
+stream = ExtResource( 22 )
 volume_db = -15.294
 [connection signal="timeout" from="DemonTimer" to="." method="_on_DemonTimer_timeout"]
 [connection signal="timeout" from="CollectableTimer" to="." method="_on_CollectableTimer_timeout"]

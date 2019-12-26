@@ -7,6 +7,7 @@ export (PackedScene) var Collectable
 const GROUND_LENGTH = 1000
 const DEMON_TIMER_WAIT_TIME = 4
 const COLLECTABLE_TIMER_WAIT_TIME = 1
+const MAX_SCORE = 20.0
 
 var savegame = File.new()
 var save_path = "user://savegame.save"
@@ -29,6 +30,7 @@ func _ready():
 	screensize = get_viewport_rect().size
 	add_ground('LEFT')
 	add_ground('RIGHT')
+	$ParallaxBackground/Light2D.mode = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,8 +44,14 @@ func _process(delta):
 		$HUD/TimerLabel.text = "Time: " + str(time)
 		if score <= 0:
 			end_game()
-		if score >= 5:
+		if score >= MAX_SCORE:
 			win_game()
+		if score < MAX_SCORE:
+			$ParallaxBackground/Light2D.mode = 0
+		if score >= MAX_SCORE/3:
+			$ParallaxBackground/Light2D.mode = 1
+		if score >= MAX_SCORE*(2.0/3):
+			$ParallaxBackground/Light2D.mode = 2
 	
 func new_game():
 	won = false
