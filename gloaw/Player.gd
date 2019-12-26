@@ -16,6 +16,8 @@ func _ready():
 func _physics_process(delta):
 	motion.y += GRAVITY
 	
+	$AnimatedSprite.speed_scale = 1
+	$DemonRow.speed_scale = 1
 	if Input.is_action_pressed("ui_right"):
 		motion.x = SPEED
 		$AnimatedSprite.flip_h = false
@@ -45,4 +47,6 @@ func _physics_process(delta):
 			motion.x += 200
 		elif Input.is_action_pressed("ui_left"):
 			motion.x -= 200
+		$AnimatedSprite.speed_scale = 3
+		$DemonRow.speed_scale = 3
 	move_and_slide(motion, UP)

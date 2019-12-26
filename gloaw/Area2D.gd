@@ -11,8 +11,9 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if !get_parent().started:
+		queue_free()
 
 func _physics_process(delta):
 	motion.y += 3 * delta

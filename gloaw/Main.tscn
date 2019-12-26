@@ -23,41 +23,41 @@
 [ext_resource path="res://sounds/beep2.wav" type="AudioStream" id=21]
 [ext_resource path="res://sounds/beep3.wav" type="AudioStream" id=22]
 
-[sub_resource type="OccluderPolygon2D" id=17]
+[sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 3.83844, -43.8348, -6.00272, -42.6251, -11.269, -38.8377, -16.4948, -31.7763, -20.2003, -21.3793, -20.4828, -12.3937, -19.2074, -6.80582, -17.7194, -7.73407, -17.2827, -2.63358, -14.2174, -3.48953, -14.8813, 0.797852, -18.2295, 6.0816, -16.2863, 7.16461, -20.0112, 14.0918, -26.4076, 22.8095, -30.1304, 30.6286, -24.8144, 38.2407, -20.415, 40.2446, -22.153, 58.9799, 5.0249, 61.437, 6.99078, 42.4291, 11.7719, 40.3725, 9.25601, 31.9747, 7.2457, 19.4705, 6.7471, 11.2918, 4.31561, 4.48846, 3.85086, 0.375824, 5.09174, -3.74982, 10.1433, -1.91296, 15.7482, -5.16818, 19.2816, -10.3328, 20.1542, -13.8048, 22.6768, -14.2243, 20.3519, -17.4492, 22.5814, -22.1017, 21.8869, -30.3016, 19.3171, -35.832, 11.9811, -42.1774 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 32
+size = 64
 font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 64
-font_data = ExtResource( 12 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 64
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 12 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.0037037, 0.966667 )
 colors = PoolColorArray( 0.972549, 0.772549, 0.235294, 1, 0.74292, 0.465962, 0.465962, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=8]
 max_value = 10.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.865243, 0.19325 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
-curve = SubResource( 9 )
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=10]
 emission_shape = 2
 emission_box_extents = Vector3( 5, 20, 1 )
 flag_disable_z = true
@@ -71,20 +71,20 @@ orbit_velocity_random = 0.0
 linear_accel = 25.0
 angle = 45.0
 scale = 10.0
-scale_curve = SubResource( 10 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 32
 outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
 font_data = ExtResource( 12 )
 
-[sub_resource type="DynamicFont" id=13]
-size = 32
-outline_color = Color( 0.141176, 0.145098, 0.196078, 1 )
-font_data = ExtResource( 12 )
-
-[sub_resource type="Shader" id=14]
+[sub_resource type="Shader" id=13]
 code = "shader_type canvas_item;
 render_mode unshaded;
  
@@ -95,10 +95,10 @@ void fragment()
 	COLOR.rgb = vec3(dot(screen.rgb, vec3(brightness, brightness, brightness)));
 }"
 
-[sub_resource type="ShaderMaterial" id=15]
-shader = SubResource( 14 )
+[sub_resource type="ShaderMaterial" id=14]
+shader = SubResource( 13 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=15]
 size = 64
 font_data = ExtResource( 12 )
 
@@ -179,7 +179,7 @@ position = Vector2( 154.927, 171.029 )
 position = Vector2( 0.197083, 2.06857 )
 rotation = -12.6746
 z_index = -1
-occluder = SubResource( 17 )
+occluder = SubResource( 1 )
 
 [node name="DemonTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -213,7 +213,7 @@ margin_left = -20.0
 margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "1)
 "
@@ -227,7 +227,7 @@ margin_left = -20.0
 margin_top = 5.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "2)
 "
@@ -241,7 +241,7 @@ margin_left = -20.0
 margin_top = 30.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "3)
 "
@@ -255,7 +255,7 @@ margin_left = -20.0
 margin_top = 55.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "4)
 "
@@ -269,7 +269,7 @@ margin_left = -20.0
 margin_top = 80.0
 margin_right = 20.0
 margin_bottom = 181.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "5)
 "
@@ -279,7 +279,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 40.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
@@ -291,7 +291,7 @@ margin_left = -12.0
 margin_top = -280.0
 margin_right = 12.0
 margin_bottom = 300.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "0
 "
@@ -307,7 +307,7 @@ margin_left = -92.0
 margin_top = -145.0
 margin_right = 92.0
 margin_bottom = -34.9333
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "gloaw"
 align = 1
@@ -318,7 +318,7 @@ rotation = -1.5708
 scale = Vector2( 0.2, 0.2 )
 amount = 100
 lifetime = 2.0
-process_material = SubResource( 11 )
+process_material = SubResource( 10 )
 
 [node name="InstructionsLabel" type="Label" parent="HUD"]
 anchor_left = 0.5
@@ -329,7 +329,7 @@ margin_left = -336.0
 margin_top = -70.0
 margin_right = 336.0
 margin_bottom = 39.5
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "collect twenty lights after you catch your demons
 <arrow keys> or <WASD> to move, <space> to accelerate"
@@ -347,7 +347,7 @@ margin_left = -61.0
 margin_top = -301.0
 margin_right = 59.0
 margin_bottom = -258.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "start"
@@ -370,7 +370,7 @@ margin_left = -71.0
 margin_top = -264.0
 margin_right = 70.0
 margin_bottom = -226.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 text = "leaderboard"
@@ -379,7 +379,7 @@ clip_text = true
 
 [node name="GreyscaleShader" type="TextureRect" parent="HUD"]
 visible = false
-material = SubResource( 15 )
+material = SubResource( 14 )
 margin_top = 1.0
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -399,7 +399,7 @@ margin_left = -68.2493
 margin_top = -297.514
 margin_right = 76.7507
 margin_bottom = -260.514
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -420,7 +420,7 @@ margin_left = -69.7499
 margin_top = -260.485
 margin_right = 75.2501
 margin_bottom = -228.485
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -438,7 +438,7 @@ margin_left = -69.7499
 margin_top = -260.485
 margin_right = 75.2501
 margin_bottom = -228.485
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.639216, 0.0627451, 0.0627451, 1 )
 custom_colors/font_color_pressed = Color( 0.639216, 0.0627451, 0.0627451, 1 )
@@ -464,7 +464,7 @@ margin_left = -45.0
 margin_top = -140.0
 margin_right = 56.0
 margin_bottom = 25.5
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 15 )
 custom_colors/font_color_shadow = Color( 0.317647, 0.25098, 0.25098, 1 )
 text = "0
 "
