@@ -5,6 +5,8 @@ glow in the gloam. [wip]
 <p align="center"><img src="https://github.com/eutopi/gloaw/blob/master/screenshots/1.png" alt="drawing" width="500"/></p>
 <p align="center"><i></i></p>
 
+![gloaw demo](screenshots/demo.gif)
+
 ## Credits
 - Art by me :)
 - Font by Daniel Linssen https://managore.itch.io/m5x7
