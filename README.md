@@ -1,6 +1,8 @@
 # gloaw
 
-glow in the gloam. [wip]
+glow in the gloam. 
+
+Find download links [here](https://tongyuzhou.com/games/gloaw/).
 
 ![gloaw demo](screenshots/demo.gif)
 
