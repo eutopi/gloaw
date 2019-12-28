@@ -28,6 +28,7 @@ func _on_StartButton_pressed():
 	$ScoreLabel.show()
 	$StartButton/StartSound.play()
 	$StartButton/StartMusic.stop()
+	$CreatorLabel.hide()
 	emit_signal("start_game")
 
 func _on_RestartButton_pressed():
@@ -49,6 +50,7 @@ func _on_LeaderboardButton_pressed():
 	$StartButton/StartSound.play()
 	$BackButton.show()
 	$Leaderboard.show()
+	$CreatorLabel.hide()
 	var places_array = [$Leaderboard/PlaceLabel1, $Leaderboard/PlaceLabel2, $Leaderboard/PlaceLabel3, $Leaderboard/PlaceLabel4, $Leaderboard/PlaceLabel5]
 	var stats = get_parent().load_game()
 	var top_five = stats.keys()
@@ -69,6 +71,7 @@ func _on_HomeButton_pressed():
 	$LeaderboardButton.show()
 	$StartButton/StartMusic.play()
 	$Leaderboard.hide()
+	$CreatorLabel.show()
 
 func _on_BackButton_pressed():
 	_ready()
@@ -79,3 +82,4 @@ func _on_BackButton_pressed():
 	$LeaderboardButton.show()
 	$BackButton.hide()
 	$Leaderboard.hide()
+	$CreatorLabel.show()

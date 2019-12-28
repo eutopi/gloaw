@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !get_parent().started:
+	if !get_parent().started or Input.is_action_pressed("ui_restart"):
 		queue_free()
 
 func _on_demon_touched(body):

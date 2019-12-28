@@ -39,6 +39,9 @@ func _process(delta):
 	elif ground_pos[0] < $Player.position.x - screensize.x / 2:
 			add_ground('RIGHT')
 	if started:
+		if Input.is_action_pressed("ui_restart"):
+			started = false
+			new_game()
 		time_dis /= 2
 		$HUD.update_score(score)
 		$HUD/TimerLabel.text = "Time: " + str(time)
